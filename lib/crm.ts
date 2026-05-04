@@ -26,8 +26,26 @@ export function formatDate(value: string) {
   }).format(new Date(`${value}T12:00:00`));
 }
 
+export function dateKey(date = new Date()) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
 export function todayKey() {
-  return "2026-05-03";
+  return dateKey();
+}
+
+export function formatTodayFolio(location = "LAGOS") {
+  const label = new Intl.DateTimeFormat("en-NG", {
+    day: "2-digit",
+    month: "short"
+  })
+    .format(new Date(`${todayKey()}T12:00:00`))
+    .toUpperCase();
+
+  return `${label} · ${location}`;
 }
 
 export function daysBetween(start: string, end = todayKey()) {

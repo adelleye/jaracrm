@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Plus, Send } from "lucide-react";
+import { MessageSquarePlus, Send } from "lucide-react";
 import { stages } from "@/lib/crm";
 import { useCrm } from "@/lib/store";
 import type { InteractionType } from "@/lib/types";
@@ -65,17 +65,18 @@ export function LogView() {
             Capture the conversation and leave the lead with a next action.
           </p>
           <Link
-            href="/leads/new"
-            className="focus-ring inline-flex min-h-11 items-center justify-center gap-2 border border-line px-4 text-xs font-bold uppercase tracking-[0.12em] text-ink hover:bg-[#f8f2e2]"
+            href="#log-entry"
+            className="focus-ring ink-action min-h-12 px-5 text-xs font-bold uppercase tracking-[0.12em]"
           >
-            <Plus className="h-4 w-4" />
-            New lead
+            <MessageSquarePlus className="h-4 w-4" />
+            Log update
           </Link>
         </div>
       </div>
 
-      <Card className="mt-8 p-6">
-        <form className="grid gap-6" onSubmit={onSubmit}>
+      <div id="log-entry" className="scroll-mt-28">
+        <Card className="mt-8 p-6">
+          <form className="grid gap-6" onSubmit={onSubmit}>
           <Field label="Lead">
             <select className={inputClass} value={leadId} onChange={(event) => setLeadId(event.target.value)}>
               {leads.map((lead) => (
@@ -139,8 +140,9 @@ export function LogView() {
             </Button>
             {saved && <p className="text-sm font-semibold text-palm">Saved. Opening lead profile...</p>}
           </div>
-        </form>
-      </Card>
+          </form>
+        </Card>
+      </div>
     </div>
   );
 }

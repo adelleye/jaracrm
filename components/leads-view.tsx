@@ -655,7 +655,9 @@ function QuickAction({
 }
 
 function csvCell(value: string) {
-  return `"${value.replaceAll('"', '""')}"`;
+  const escaped = value.replaceAll('"', '""');
+  const spreadsheetSafe = /^[\s]*[=+\-@]/.test(escaped) || /^[\t\r\n]/.test(escaped) ? `'${escaped}` : escaped;
+  return `"${spreadsheetSafe}"`;
 }
 
 function initials(value: string) {

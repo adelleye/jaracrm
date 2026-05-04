@@ -4,14 +4,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, RotateCcw } from "lucide-react";
 import { clsx } from "clsx";
+import { getTodayBuckets } from "@/lib/crm";
 import { useCrm } from "@/lib/store";
 import { Button } from "@/components/ui";
 
 const navItems = [
-  { id: "today", label: "Today", href: "/", count: "03" },
-  { id: "leads", label: "Leads", href: "/leads", count: "24" },
-  { id: "log", label: "Log", href: "/log", count: "11" },
-  { id: "numbers", label: "Numbers", href: "/numbers", count: "—" }
+  { id: "today", label: "Today", href: "/" },
+  { id: "leads", label: "Leads", href: "/leads" },
+  { id: "log", label: "Log", href: "/log" },
+  { id: "numbers", label: "Numbers", href: "/numbers" }
 ] as const;
 
 export function AppShell({
@@ -34,7 +35,21 @@ function ShellContent({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const { resetSeedData } = useCrm();
+  const { interactions, leads, resetSeedData } = useCrm();
+  const buckets = getTodayBuckets(leads);
+  const todayLeadIds = new Set([
+    ...buckets.dueToday.map((lead) => lead.id),
+    ...buckets.overdue.map((lead) => lead.id),
+    ...buckets.hotNoNextAction.map((lead) => lead.id),
+    ...buckets.staleProposals.map((lead) => lead.id),
+    ...buckets.noActivitySevenDays.map((lead) => lead.id)
+  ]);
+  const navCounts: Record<(typeof navItems)[number]["id"], string> = {
+    today: String(todayLeadIds.size),
+    leads: String(leads.length),
+    log: String(interactions.length),
+    numbers: ""
+  };
 
   return (
     <div className="mx-auto min-h-screen max-w-[1440px] bg-paper">
@@ -60,7 +75,9 @@ function ShellContent({
                 )}
               >
                 <span>{item.label}</span>
-                <span className={clsx("mono text-[10px]", selected ? "text-palm" : "text-[#b8ab8c]")}>{item.count}</span>
+                {navCounts[item.id] && (
+                  <span className={clsx("mono text-[10px]", selected ? "text-palm" : "text-[#b8ab8c]")}>{navCounts[item.id]}</span>
+                )}
               </Link>
             );
           })}

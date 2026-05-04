@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { AlertTriangle, CalendarClock, Flame, MessageCircleWarning, TimerReset } from "lucide-react";
-import { getTodayBuckets, sortByNextAction } from "@/lib/crm";
+import { formatTodayFolio, getTodayBuckets, sortByNextAction } from "@/lib/crm";
 import { useCrm } from "@/lib/store";
 import { Card, EmptyState } from "@/components/ui";
 import { LeadCard } from "@/components/lead-card";
@@ -53,7 +53,7 @@ export function TodayView() {
     <div className="mx-auto max-w-[1180px]">
       <div className="flex items-baseline justify-between border-b border-line pb-2">
         <span className="label">Daily command folio</span>
-        <span className="mono text-[10px] tracking-[0.05em] text-[#b8ab8c]">03 MAY · LAGOS</span>
+        <span className="mono text-[10px] tracking-[0.05em] text-[#b8ab8c]">{formatTodayFolio()}</span>
       </div>
       <div className="mt-5 flex flex-col justify-between gap-5 md:flex-row md:items-end">
         <div>
