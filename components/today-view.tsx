@@ -113,14 +113,19 @@ function Bucket({
 }) {
   return (
     <Card className="p-5">
-      <div className="flex items-start gap-3">
-        <span className="grid h-10 w-10 shrink-0 place-items-center border border-line bg-[#f8f2e2] text-palm">
-          <Icon className="h-5 w-5" />
-        </span>
-        <div>
-          <h2 className="serif text-2xl italic text-ink">{title}</h2>
-          <p className="mt-1 text-sm text-[#3d2f1b]">{description}</p>
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex items-start gap-3">
+          <span className="grid h-10 w-10 shrink-0 place-items-center border border-line bg-[#f8f2e2] text-palm">
+            <Icon className="h-5 w-5" />
+          </span>
+          <div>
+            <h2 className="serif text-2xl italic text-ink">{title}</h2>
+            <p className="mt-1 text-sm text-[#3d2f1b]">{description}</p>
+          </div>
         </div>
+        <span className="mono grid h-9 min-w-9 shrink-0 place-items-center border border-line bg-calm px-2 text-xs font-black text-palm">
+          {leads.length}
+        </span>
       </div>
       <div className="mt-4 grid gap-3">
         {leads.length ? leads.map((lead) => <LeadCard key={lead.id} lead={lead} />) : <EmptyState text="Clear for now." />}

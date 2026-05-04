@@ -70,7 +70,7 @@ function ShellContent({
                 key={item.id}
                 href={item.href}
                 className={clsx(
-                  "focus-ring flex items-baseline justify-between border-l-2 px-3 py-2.5 text-[15px] font-medium transition",
+                  "focus-ring motion-nav-item flex items-baseline justify-between border-l-2 px-3 py-2.5 text-[15px] font-medium",
                   selected ? "border-palm bg-calm text-palm" : "border-transparent text-[#3d2f1b] hover:bg-calm hover:text-ink"
                 )}
               >
@@ -116,7 +116,7 @@ function ShellContent({
                 key={item.id}
                 href={item.href}
                 className={clsx(
-                  "focus-ring grid place-items-center gap-1 px-2 py-2 text-xs font-semibold",
+                  "focus-ring motion-nav-item grid place-items-center gap-1 px-2 py-2 text-xs font-semibold",
                   selected ? "bg-calm text-palm" : "text-[#3d2f1b]"
                 )}
               >
@@ -127,7 +127,7 @@ function ShellContent({
         </nav>
       </header>
 
-      <main className="px-4 py-5 lg:ml-60 lg:px-12 lg:py-9">{children}</main>
+      <main className="motion-page px-4 py-5 lg:ml-60 lg:px-12 lg:py-9">{children}</main>
     </div>
   );
 }

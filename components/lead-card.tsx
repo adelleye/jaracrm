@@ -10,7 +10,7 @@ export function LeadCard({ lead, compact = false }: { lead: Lead; compact?: bool
   return (
     <Link
       href={`/leads/${lead.id}`}
-      className="focus-ring block border border-line bg-[#fbf6e7] p-4 transition hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[4px_5px_0_var(--ink)]"
+      className="focus-ring motion-row block border border-line bg-[#fbf6e7] p-4 transition hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[4px_5px_0_var(--ink)]"
     >
       <div className="flex items-start justify-between gap-3">
         <div>

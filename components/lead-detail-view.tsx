@@ -97,7 +97,7 @@ export function LeadDetailView({ leadId }: { leadId: string }) {
                 </span>
               </div>
               <div className="mt-3 h-2 overflow-hidden bg-calm">
-                <div className="h-full bg-palm" style={{ width: `${lead.probability}%` }} />
+                <div className="motion-meter h-full bg-palm" style={{ width: `${lead.probability}%` }} />
               </div>
               <p className="serif mt-3 italic text-[#8a7b5e]">
                 Expected value <span className="mono not-italic text-[#3d2f1b]">{formatNaira(expectedValue)}</span>

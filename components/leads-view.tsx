@@ -185,7 +185,7 @@ export function LeadsView() {
       </div>
 
       <Card className="mt-8 p-4">
-        <div className="grid gap-4 xl:grid-cols-[1fr_190px_190px_190px_auto]">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-[minmax(280px,1fr)_170px_170px_170px_auto]">
           <div className="relative">
             <Search className="pointer-events-none absolute left-4 top-3.5 h-5 w-5 text-[#8a7b5e]" />
             <input
@@ -223,8 +223,17 @@ export function LeadsView() {
               { value: "company", label: "Company" }
             ]}
           />
-          <button className="focus-ring grid h-14 w-14 place-items-center border border-line bg-[#f8f2e2] text-[#3d2f1b] hover:bg-calm" aria-label="More filters">
-            <MoreHorizontal className="h-5 w-5" />
+          <button
+            type="button"
+            className="focus-ring motion-press h-14 border border-line bg-[#f8f2e2] px-4 text-xs font-bold uppercase tracking-[0.12em] text-[#3d2f1b] hover:bg-calm md:col-span-2 xl:col-span-1"
+            onClick={() => {
+              setQuery("");
+              setStageFilter("all");
+              setOwnerFilter("all");
+              setSortMode("next_action");
+            }}
+          >
+            Reset
           </button>
         </div>
       </Card>
@@ -253,7 +262,11 @@ export function LeadsView() {
                   const health = getLeadHealth(lead);
                   const actionMissing = !lead.nextAction || !lead.nextActionDate;
                   return (
-                    <tr key={lead.id} className="align-middle transition hover:bg-[#f8f2e2]/70">
+                    <tr
+                      key={lead.id}
+                      className="motion-row align-middle transition hover:bg-[#f8f2e2]/70"
+                      style={{ animationDelay: `${Math.min(index * 24, 160)}ms` }}
+                    >
                       <td className="px-5 py-6">
                         <div className="flex items-center gap-4">
                           <Avatar label={initials(lead.name)} index={index} />
@@ -535,7 +548,7 @@ function KanbanLeadCard({
       }}
       onDragEnd={onDragEnd}
       className={clsx(
-        "group cursor-grab border border-line bg-[#f8f2e2] p-4 transition active:cursor-grabbing",
+        "motion-kanban-card group cursor-grab border border-line bg-[#f8f2e2] p-4 active:cursor-grabbing",
         isDragging ? "opacity-50 ring-2 ring-palm" : "hover:border-palm hover:bg-[#fbf6e7]"
       )}
     >

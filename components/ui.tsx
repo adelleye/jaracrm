@@ -4,12 +4,16 @@ import { getLeadHealth } from "@/lib/crm";
 
 export function Card({
   className,
-  children
-}: {
-  className?: string;
+  children,
+  ...props
+}: React.HTMLAttributes<HTMLElement> & {
   children: React.ReactNode;
 }) {
-  return <section className={clsx("ledger-card", className)}>{children}</section>;
+  return (
+    <section className={clsx("ledger-card motion-surface", className)} {...props}>
+      {children}
+    </section>
+  );
 }
 
 export function Button({
@@ -23,6 +27,7 @@ export function Button({
     <button
       className={clsx(
         "focus-ring inline-flex min-h-10 items-center justify-center gap-2 px-4 text-xs font-bold uppercase tracking-[0.12em] transition",
+        "motion-press",
         variant === "primary" && "ink-action",
         variant === "secondary" && "border border-line bg-transparent text-ink hover:bg-[#f8f2e2]",
         variant === "ghost" && "text-ink hover:bg-[#e6dcc1]",
@@ -49,7 +54,7 @@ export function Field({
 }
 
 export const inputClass =
-  "focus-ring min-h-11 w-full border border-line bg-[#f8f2e2] px-3 text-sm text-ink placeholder:text-[#8a7b5e]";
+  "focus-ring motion-focus min-h-11 w-full border border-line bg-[#f8f2e2] px-3 text-sm text-ink placeholder:text-[#8a7b5e]";
 
 export function HealthBadge({ lead }: { lead: Lead }) {
   const health = getLeadHealth(lead);

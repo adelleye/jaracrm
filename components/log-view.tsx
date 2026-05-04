@@ -77,69 +77,69 @@ export function LogView() {
       <div id="log-entry" className="scroll-mt-28">
         <Card className="mt-8 p-6">
           <form className="grid gap-6" onSubmit={onSubmit}>
-          <Field label="Lead">
-            <select className={inputClass} value={leadId} onChange={(event) => setLeadId(event.target.value)}>
-              {leads.map((lead) => (
-                <option key={lead.id} value={lead.id}>
-                  {lead.name} - {lead.company}
-                </option>
-              ))}
-            </select>
-          </Field>
+            <Field label="Lead">
+              <select className={inputClass} value={leadId} onChange={(event) => setLeadId(event.target.value)}>
+                {leads.map((lead) => (
+                  <option key={lead.id} value={lead.id}>
+                    {lead.name} - {lead.company}
+                  </option>
+                ))}
+              </select>
+            </Field>
 
-          {selectedLead && (
-            <div className="border-l-4 border-palm bg-calm p-4 text-sm text-[#3d2f1b]">
-              Current stage: <span className="font-bold text-ink">{stages.find((stage) => stage.id === selectedLead.stage)?.label}</span>.
-              Current next action: <span className="font-bold text-ink">{selectedLead.nextAction || "none"}</span>.
+            {selectedLead && (
+              <div className="border-l-4 border-palm bg-calm p-4 text-sm text-[#3d2f1b]">
+                Current stage: <span className="font-bold text-ink">{stages.find((stage) => stage.id === selectedLead.stage)?.label}</span>.
+                Current next action: <span className="font-bold text-ink">{selectedLead.nextAction || "none"}</span>.
+              </div>
+            )}
+
+            <Field label="Interaction type">
+              <select className={inputClass} value={type} onChange={(event) => setType(event.target.value as InteractionType)}>
+                {interactionTypes.map((item) => (
+                  <option key={item} value={item}>
+                    {item.replace("_", " ")}
+                  </option>
+                ))}
+              </select>
+            </Field>
+
+            <Field label="Summary">
+              <textarea
+                className={`${inputClass} min-h-32 py-3`}
+                value={summary}
+                onChange={(event) => setSummary(event.target.value)}
+                placeholder="Example: Spoke on WhatsApp. Finance manager wants final invoice terms before Friday."
+                required
+              />
+            </Field>
+
+            <div className="grid gap-5 md:grid-cols-2">
+              <Field label="Next action">
+                <input
+                  className={inputClass}
+                  value={nextAction}
+                  onChange={(event) => setNextAction(event.target.value)}
+                  placeholder="Send pricing recap on WhatsApp"
+                />
+              </Field>
+              <Field label="Next action date">
+                <input
+                  className={inputClass}
+                  type="date"
+                  value={nextActionDate}
+                  onChange={(event) => setNextActionDate(event.target.value)}
+                />
+              </Field>
             </div>
-          )}
 
-          <Field label="Interaction type">
-            <select className={inputClass} value={type} onChange={(event) => setType(event.target.value as InteractionType)}>
-              {interactionTypes.map((item) => (
-                <option key={item} value={item}>
-                  {item.replace("_", " ")}
-                </option>
-              ))}
-            </select>
-          </Field>
-
-          <Field label="Summary">
-            <textarea
-              className={`${inputClass} min-h-32 py-3`}
-              value={summary}
-              onChange={(event) => setSummary(event.target.value)}
-              placeholder="Example: Spoke on WhatsApp. Finance manager wants final invoice terms before Friday."
-              required
-            />
-          </Field>
-
-          <div className="grid gap-5 md:grid-cols-2">
-            <Field label="Next action">
-              <input
-                className={inputClass}
-                value={nextAction}
-                onChange={(event) => setNextAction(event.target.value)}
-                placeholder="Send pricing recap on WhatsApp"
-              />
-            </Field>
-            <Field label="Next action date">
-              <input
-                className={inputClass}
-                type="date"
-                value={nextActionDate}
-                onChange={(event) => setNextActionDate(event.target.value)}
-              />
-            </Field>
-          </div>
-
-          <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-            <Button type="submit" className="min-h-12">
-              <Send className="h-4 w-4" />
-              Save update
-            </Button>
-            {saved && <p className="text-sm font-semibold text-palm">Saved. Opening lead profile...</p>}
-          </div>
+            <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+              <Button type="submit" className="min-h-12">
+                <Send className="h-4 w-4" />
+                Save update
+              </Button>
+              {saved && <p className="text-sm font-semibold text-palm">Saved. Opening lead profile...</p>}
+            </div>
           </form>
         </Card>
       </div>
